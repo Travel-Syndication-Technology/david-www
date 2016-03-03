@@ -11,20 +11,20 @@ module.exports = require('rc')('david', {
     protocol: 'https',
     host: 'github.com',
     oauth: {
-      id: null,
-      secret: null
+      id: "cb7e1bb8a1f7c0487cfc",
+      secret: "1830ea3c0da6fa7289842fbb4e3d2f22f3833f5c"
     },
-    token: null
+    token: "7fc4b20b45d2c52e193e026a574274c1e8560813"
   },
   npm: {
-    hostname: 'https://www.npmjs.com',
+    hostname: 'https://npm.infra.tstllc.net',
     options: {
-      registry: 'http://registry.npmjs.org'
+      registry: 'https://npm.infra.tstllc.net'
     },
     feed: 'https://skimdb.npmjs.com/registry'
   },
   site: {
-    hostname: 'http://localhost:1337'
+    hostname: 'https://david.infra.tstllc.net'
   },
   db: {
     path: 'data'

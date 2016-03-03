@@ -1,13 +1,13 @@
-FROM node:4
+FROM docker.infra.tstllc.net/base/ui-base-docker:latest
 
-WORKDIR /opt
+ENV NODE_ENV=production
+
+# Install Dependencies
+WORKDIR /ui
+
+# Copy over the App
+COPY . /ui/
+
+# Run the image
 EXPOSE 1337
-VOLUME ["/opt/data"]
-CMD ["node", "index.js"]
-
-ADD package.json /opt/package.json
-RUN cd /opt && npm install
-
-ADD . /opt
-
-RUN npm run build
+CMD [ "node", "index" ]
