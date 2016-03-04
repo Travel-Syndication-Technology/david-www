@@ -1,0 +1,14 @@
+david-www:
+  labels:
+    io.rancher.container.pull_image: always
+  image: docker.infra.tstllc.net/lib/david:latest
+  volumes:
+  - /nfs/npm/config/david.js:/ui/config.js:ro
+npm:
+  labels:
+    io.rancher.container.pull_image: always
+  image: keyvanfatehi/sinopia:latest
+  volumes:
+  - /nfs/npm/storage:/npm/storage:rw
+  - /nfs/npm/htpasswd:/npm/htpasswd:rw
+  - /nfs/npm/config/default.yaml:/opt/sinopia/config.yaml:ro
