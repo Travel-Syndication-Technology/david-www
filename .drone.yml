@@ -21,6 +21,18 @@ publish:
     email: drone@tstllc.net
     storage_driver: overlay
 
+deploy:
+  rancher:
+    url: $$RANCHER_URL
+    access_key: $$RANCHER_KEY
+    secret_key: $$RANCHER_SECRET
+    service: npm/david-www
+    docker_image: docker.infra.tstllc.net/lib/david:$$BRANCH.$$BUILD_NUMBER
+    confirm: true
+    timeout: 300
+    when:
+      branch: master
+
 cache:
   mount:
     - node_modules

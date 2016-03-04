@@ -11,10 +11,10 @@ module.exports = require('rc')('david', {
     protocol: 'https',
     host: 'github.com',
     oauth: {
-      id: "cb7e1bb8a1f7c0487cfc",
-      secret: "1830ea3c0da6fa7289842fbb4e3d2f22f3833f5c"
+      id: "",
+      secret: ""
     },
-    token: "7fc4b20b45d2c52e193e026a574274c1e8560813"
+    token: ""
   },
   npm: {
     hostname: 'https://npm.infra.tstllc.net',
