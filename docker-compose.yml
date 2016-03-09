@@ -1,7 +1,18 @@
+coverage:
+  environment:
+    PORT: '3000'
+    STORAGE_DIR: /storage/
+    UPLOAD_DIR: /uploads/
+  labels:
+    io.rancher.container.pull_image: always
+  image: docker.infra.tstllc.net/drone/coverage-service:master.5
+  volumes:
+  - /nfs/npm/coverage-service/uploads/:/uploads/:rw
+  - /nfs/npm/coverage-service/storage/:/storage/:rw
 david-www:
   labels:
     io.rancher.container.pull_image: always
-  image: docker.infra.tstllc.net/lib/david:latest
+  image: docker.infra.tstllc.net/lib/david:master.4
   volumes:
   - /nfs/npm/config/david.js:/ui/config.js:ro
 npm:
