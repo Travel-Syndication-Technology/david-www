@@ -1,38 +1,23 @@
-build:
-  image: docker.infra.tstllc.net/base/ui-base-docker:latest
-  pull: true
-  auth_config:
-    username: drone
-    password: $$DRONE_REGISTRY_PASS
-    email: drone@tstllc.net
-  commands:
-    - npm update
-    - npm run build
+pipeline:
+  build:
+    image: docker.infra.tstllc.net/base/ui-base-docker:latest
+    commands:
+      - npm update
+      - npm run build
 
-publish:
   docker:
-    repo: lib/david
+    image: plugins/docker
+    repo: docker.infra.tstllc.net/lib/david
     tag:
-      - '$${BRANCH/master/latest}'
-      - '$$BRANCH.$$BUILD_NUMBER'
-    registry: docker.infra.tstllc.net
-    username: drone
-    password: $$DRONE_REGISTRY_PASS
-    email: drone@tstllc.net
+      - '${DRONE_BRANCH/master/latest}'
+      - '${DRONE_BRANCH}.build-${DRONE_BUILD_NUMBER}'
     storage_driver: overlay
 
-deploy:
   rancher:
-    url: $$RANCHER_URL
-    access_key: $$RANCHER_KEY
-    secret_key: $$RANCHER_SECRET
+    image: docker.infra.tstllc.net/drone/rancher
     service: npm/david-www
-    docker_image: docker.infra.tstllc.net/lib/david:$$BRANCH.$$BUILD_NUMBER
+    docker_image: docker.infra.tstllc.net/lib/david:${DRONE_BRANCH}.build-${DRONE_BUILD_NUMBER}
     confirm: true
     timeout: 300
     when:
       branch: master
-
-cache:
-  mount:
-    - node_modules
