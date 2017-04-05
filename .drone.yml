@@ -12,6 +12,21 @@ pipeline:
       - '${DRONE_BRANCH/master/latest}'
       - '${DRONE_BRANCH}.build-${DRONE_BUILD_NUMBER}'
     storage_driver: overlay
+    when:
+      branch: master
+
+  docker:
+    image: plugins/docker
+    repo: docker.infra.tstllc.net/lib/david
+    tag:
+      - ${DRONE_COMMIT_SHA}.build-${DRONE_BUILD_NUMBER}
+    force_tag: true
+    storage_driver: overlay
+    when:
+      branch: 
+        include: [ bugfix/*, feature/*, hotfix/* ]
+        exclude: [ master ]
+
 
   rancher:
     image: docker.infra.tstllc.net/drone/rancher
